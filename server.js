@@ -18,7 +18,7 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static("website"));
 
-//post function
+// Post function
 app.post('/addData', addData);
 function addData(request, response) {
   let data = request.body;

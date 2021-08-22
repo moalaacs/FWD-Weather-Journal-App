@@ -30,16 +30,16 @@ const getData = () => {
   });
 
 // Post weather data
-const postWeatherData = async (url = "", info = {}) => {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(info),
-  });
-    const newData = await response.json();
-    return newData;
+  const postWeatherData = async (url = "", info = {}) => {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    });
+      const newData = await response.json();
+      return newData;
 }};
 
 // Show final data on screen
