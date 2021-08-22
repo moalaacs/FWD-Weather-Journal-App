@@ -5,7 +5,7 @@ const apiKey = ",&appid=78c3ee6ef4afee66b61c223a417080f1&units=metric";
 
 // Creating a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getMonth() + 1 + '/'+ d.getDate()+'/'+ d.getFullYear();
 
 // Get data from user input
 const getData = () => { 
@@ -25,10 +25,9 @@ const getData = () => {
       const {main: { temp },name: city,weather: [{ description }]} = weatherData;
       const zipInfo = {newDate,city,temp,description,feelings};
       postWeatherData(server + "/join", zipInfo);
-      dataOnScreen();
+      updateUI();
     }
   });
-};
 
 // Post weather data
 const postWeatherData = async (url = "", info = {}) => {
@@ -41,16 +40,16 @@ const postWeatherData = async (url = "", info = {}) => {
   });
     const newData = await response.json();
     return newData;
-};
+}};
 
 // Show final data on screen
 document.getElementById("generate").addEventListener("click", getData);
-const dataOnScreen = async () => {
-    const response = await fetch(server + "/full");
-    const savedData = await response.json();
-    document.getElementById("city").innerHTML = savedData.city;
-    document.getElementById("temp").innerHTML = savedData.temp + '&degC';
-    document.getElementById("description").innerHTML = savedData.description;
-    document.getElementById("content").innerHTML = savedData.feelings;
-    document.getElementById("date").innerHTML = savedData.newDate;
+const updateUI = async () => {
+    const request = await fetch(server + "/full");
+    const allData = await request.json();
+    document.getElementById("city").innerHTML = allData.city;
+    document.getElementById("temp").innerHTML = allData.temp + '&degC';
+    document.getElementById("description").innerHTML = allData.description;
+    document.getElementById("content").innerHTML = allData.feelings;
+    document.getElementById("date").innerHTML = allData.newDate
 };

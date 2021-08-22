@@ -18,11 +18,22 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static("website"));
 
+//post function
+app.post('/addData', addData);
+function addData(request, response) {
+  let data = request.body;
+  console.log('server side data ', data)
+  projectData["date"] = data.date;
+  projectData["temp"] = data.temp;
+  projectData["feel"] = data.feeling;
+  response.send(projectData);
+}
+
 // Setup server
-myData = [];
-app.get("/full", (request, response) => response.send(myData));
+projectData = {};
+app.get("/full", (request, response) => response.send(projectData));
 app.post("/join", (request, response) => {
-  myData = request.body;
+  projectData = request.body;
 });
 
 // Listen to port
